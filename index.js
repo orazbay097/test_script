@@ -18,7 +18,7 @@ function setAppId(id) {
     alert(id)
 }
 
-const addIframe = () => {
+function addIframe() {
     var iframe = document.createElement('iframe');
     iframe.style.display = "none";
     iframe.src = 'https://orazbay097.github.io/test_iframe/'
