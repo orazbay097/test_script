@@ -39,7 +39,7 @@ function getIdFromFingerprint() {
 
     if (id) return Promise.resolve(id);
 
-    import('https://fpcdn.io/v3/1ItjaKwplSsZ3CpiS7pJ')
+    return import('https://fpcdn.io/v3/1ItjaKwplSsZ3CpiS7pJ')
         .then(FingerprintJS => FingerprintJS.load())
         .then(fp => fp.get())
         .then(result => {
