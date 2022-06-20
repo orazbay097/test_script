@@ -1,9 +1,6 @@
-const idGetter = isSafari() ? getIdFromFingerprint : getIdFromIframe;
-
-idGetter().then(id => setAppId(id));
+getIdFromIframe().then(id => setAppId(id));
 
 
-function isSafari() { return /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification)); }
 
 function setAppId(id) {
     window.userId = id;
@@ -33,17 +30,4 @@ function getIdFromIframe() {
     })
 }
 
-function getIdFromFingerprint() {
-    const KEY_USER_ID = 'fingerprint-userid';
-    const id = localStorage.getItem(KEY_USER_ID);
 
-    if (id) return Promise.resolve(id);
-
-    return import('https://fpcdn.io/v3/1ItjaKwplSsZ3CpiS7pJ')
-        .then(FingerprintJS => FingerprintJS.load())
-        .then(fp => fp.get())
-        .then(result => {
-            localStorage.setItem(KEY_USER_ID, result.visitorId);
-            return result.visitorId
-        });
-}
