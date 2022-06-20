@@ -16,10 +16,11 @@ function getIdFromIframe() {
 
                 if (data.event != "getId") return
 
-                window.removeEventListener("message", messageHandler);
                 resolve(data.value)
             } catch (e) {
                 reject(e);
+            } finally {
+                window.removeEventListener("message", messageHandler);
             }
         })
 
